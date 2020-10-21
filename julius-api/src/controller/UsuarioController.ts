@@ -18,10 +18,24 @@ export class UsuarioController {
         return usuario;
     }
 
-    async recuperarLancamentosDoUsuario(id: number) {
-        const usuario = await getManager().findOne(Usuario, id, {
+    async recuperarLancamentosDoUsuario(idUsuario: number) {
+        const usuario = await getManager().findOne(Usuario, idUsuario, {
             relations: ['lancamentos']
         });
         return usuario.lancamentos;
     }
+
+    async recuperarLancamentosDasEntradasDoUsuario(idUsuario: number) {
+        const lancamentos = await getManager().findOne(Usuario, idUsuario, {
+            relations: ['lancamentos']
+        });
+        return lancamentos;
+    }
+    async recuperarLancamentosDosGastosPeloUsuario(idUsuario: number) {
+        const lancamentos = await getManager().findOne(Usuario, idUsuario, {
+            relations: ['lancamentos']
+        });
+        return lancamentos;
+    }    
+
 }

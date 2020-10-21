@@ -35,5 +35,40 @@ routerUsuario.post('/', async (req, res) => {
         const idUsuario = parseInt(req.params.idUsuario);
         const lancamentos = await usuarioCtrl.recuperarLancamentosDoUsuario(idUsuario);
         res.json(lancamentos);
-    });    
+    }); 
+    
+    /**
+ * Serviço para recuperar os lançamentos de um usuário
+ */
+routerUsuario.get('/lancamentos/:idUsuario', async(req, res) => {
+    const idUsuario = parseInt(req.params.idUsuario);
+    const lancamentos = await usuarioCtrl.recuperarLancamentosDoUsuario(idUsuario);
+    res.json(lancamentos);
+});
+
+/**
+ * Serviço de retorno das entradas
+ */
+routerUsuario.get('/lancamentos/entradas/:idUsuario', async(req, res) => {
+    const idUsuario = parseInt(req.params.idUsuario);
+    const lancamentos = await usuarioCtrl.recuperarLancamentosEntradas(idUsuario);
+    if(!lancamentos.length){
+        res.status(204).json({ mensagem: 'Nenhum lançamento encontrado' });
+    }else{
+        res.json(lancamentos);
+    }
+});
+
+/**
+ * Serviço de retorno dos lancamentos dos os gastos
+ */
+routerUsuario.get('/lancamentos/gastos/:idUsuario', async(req, res) => {
+    const idUsuario = parseInt(req.params.idUsuario);
+    const lancamentos = await usuarioCtrl.recuperarLancamentosGastos(idUsuario);
+    if(!lancamentos.length){
+        res.status(204).json({ mensagem: 'Nenhum lançamento encontrado' });
+    }else{
+        res.json(lancamentos);
+    }
+});
 });
