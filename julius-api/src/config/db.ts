@@ -7,5 +7,4 @@ export const conectarServidorNoBD = async () => {
     process.on('SIGINT', () => {
         conexao.close().then(() => console.log('Conexão com o BD fechada'));
     });
-
 };
